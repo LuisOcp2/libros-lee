@@ -15,7 +15,12 @@ export default function Library() {
     <div className="container">
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Mi biblioteca</h1>
-        <button onClick={logout} style={{ width: 'auto', padding: '8px 16px' }}>Salir</button>
+        <div>
+          {user?.role === 'admin' && (
+            <Link to="/admin"><button style={{ width: 'auto', padding: '8px 16px', marginRight: 8 }}>Admin</button></Link>
+          )}
+          <button onClick={logout} style={{ width: 'auto', padding: '8px 16px' }}>Salir</button>
+        </div>
       </header>
       {books.map((b) => (
         <div key={b.id} className="card">
@@ -24,7 +29,7 @@ export default function Library() {
           <Link to={`/read/${b.id}`}><button>Abrir</button></Link>
         </div>
       ))}
-      {books.length === 0 && <p>No hay libros aún. Un admin puede añadirlos desde la API.</p>}
+      {books.length === 0 && <p>No hay libros aún.</p>}
     </div>
   );
 }
